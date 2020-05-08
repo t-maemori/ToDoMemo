@@ -23,13 +23,42 @@ namespace API.Controllers
         }
 
         /// <summary>
+        /// PUT: edit/add
+        /// データ追加API
+        /// </summary>
+        /// <param name="memoData"></param>
+        /// <returns></returns>
+        [HttpPut("add")]
+        public async Task<IActionResult> PutAddMemo(Memo memoData)
+        {
+            // 処理は後ほど
+
+            return NoContent();
+        }
+
+        /// <summary>
         /// PUT: edit/update
         /// データ更新API
         /// </summary>
+        /// <param name="userId"></param>
         /// <param name="memoData"></param>
         /// <returns></returns>
         [HttpPut("update")]
         public async Task<IActionResult> PutUpdateMemo(string userId, Memo memoData)
+        {
+            // 処理は後ほど
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// PUT: edit/remove
+        /// データ削除API
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        [HttpPut("remove")]
+        public async Task<IActionResult> PutRemoveMemo(string userId)
         {
             // 処理は後ほど
 
@@ -43,20 +72,6 @@ namespace API.Controllers
         /// <returns></returns>
         [HttpDelete("end")]
         public async Task<IActionResult> DeleteEndEdit()
-        {
-            // 処理は後ほど
-
-            return NoContent();
-        }
-
-        // ※ここでデータを持つ間のみ、以下のAPIをGETとする。
-        /// <summary>
-        /// GET: edit/data
-        /// データ取得API
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("data")]
-        public async Task<IActionResult> GetMemo()
         {
             // 処理は後ほど
 
