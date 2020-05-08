@@ -14,3 +14,10 @@
 
 Visual Studioにて、Ctrl + F5キーでアプリを実行できる。
 
+※デバッグモードでの起動でも可能。
+
+## ◆確認方法
+
+現状、以下のコマンドで疎通確認が取れている。
+> curl -D - -X GET "http://localhost:9999/api/TodoItems"
+
