@@ -2,7 +2,7 @@
 {
     public class Memo
     {
-        public int Id { get; set; }
-        public string Data { get; set; }
+        public int id { get; set; }
+        public string data { get; set; }
     }
 }

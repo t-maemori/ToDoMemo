@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -13,11 +15,11 @@ namespace API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("data")]
-        public async Task<IActionResult> GetMemo()
+        public List<Memo> GetMemo()
         {
             // 処理は後ほど
 
-            return NoContent();
+            return null;
         }
     }
 }
