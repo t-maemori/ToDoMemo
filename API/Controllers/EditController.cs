@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using API.Models;
+using System.Collections.Generic;
 
 namespace API.Controllers
 {
@@ -7,6 +8,10 @@ namespace API.Controllers
     [ApiController]
     public class EditController : ControllerBase
     {
+        private static string editUser = null;
+        private static int count = 1;
+        private static IDictionary<int, string> memoMap = new Dictionary<int, string>();
+
         /// <summary>
         /// POST: edit/start/{userId}
         /// 編集開始API
@@ -16,24 +21,44 @@ namespace API.Controllers
         [HttpPost("start/{userId}")]
         public bool PostStartEdit(string userId)
         {
-            // 処理は後ほど
-            System.Diagnostics.Debug.WriteLine("111 : " + userId);
+            // 編集中ユーザがいないか
+            if (editUser != null)
+            {
+                return false;
+            }
 
+            // 編集中ユーザ更新
+            editUser = userId;
             return true;
         }
 
         /// <summary>
-        /// PUT: edit/add/{userId}
+        /// PUT: edit/add/{userId}/{memoId}
         /// データ追加API
         /// </summary>
         /// <param name="userId">ユーザID</param>
+        /// <param name="memoId">メモID</param>
         /// <param name="memoData"></param>
         /// <returns>完了フラグ</returns>
-        [HttpPut("add/{userId}")]
-        public bool PutAddMemo(string userId, Memo memoData)
+        [HttpPut("add/{userId}/{memoId}")]
+        public bool PutAddMemo(string userId, int memoId, string memoData)
         {
-            // 処理は後ほど
-            System.Diagnostics.Debug.WriteLine("222 : " + userId + ", memoData: " + memoData.id + ", " + memoData.data);
+            // 編集中ユーザであるか
+            if (!userId.Equals(editUser))
+            {
+                return false;
+            }
+
+            if(memoId <= 0)
+            {
+                // 新規作成
+                memoMap.Add(count++, memoData);
+            }
+            else
+            {
+                // データ更新
+                memoMap.Add(memoId, memoData);
+            }
 
             return true;
         }
@@ -46,12 +71,22 @@ namespace API.Controllers
         /// <param name="memoId">メモID</param>
         /// <returns>完了フラグ</returns>
         [HttpDelete("remove/{userId}/{memoId}")]
-        public bool DeleteRemoveMemo(string userId, string memoId)
+        public bool DeleteRemoveMemo(string userId, int memoId)
         {
-            // 処理は後ほど
-            System.Diagnostics.Debug.WriteLine("333 : " + userId + " : " + memoId);
+            // 編集中ユーザであるか
+            if (!userId.Equals(editUser))
+            {
+                return false;
+            }
 
-            return true;
+            // 指定されたメモIDがデータにあるか
+            if (memoMap.ContainsKey(memoId))
+            {
+                memoMap.Remove(memoId);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -63,9 +98,14 @@ namespace API.Controllers
         [HttpDelete("end/{userId}")]
         public bool DeleteEndEdit(string userId)
         {
-            // 処理は後ほど
-            System.Diagnostics.Debug.WriteLine("444 : " + userId);
+            // 編集中ユーザであるか
+            if (!userId.Equals(editUser))
+            {
+                return false;
+            }
 
+            // 編集中ユーザをいないものに再設定
+            editUser = null;
             return true;
         }
     }
