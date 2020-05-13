@@ -3,6 +3,10 @@
 
 ②Visual Studio 2019
 
+③Docker
+
+④docker-compose
+
 ## ◆アプリ概要
 リクエスト内容により、付箋メモのデータを登録・変更・削除するAPIを作成する。
 
@@ -13,18 +17,28 @@
 又、DBを使用していないが、編集中のユーザでない限り、メモデータの更新は行えない処理を追加している。
 
 ## ◆起動コマンド
+①Redis、MySQLをDockerコンテナで起動
 
-Visual Studioにて、Ctrl + F5キーでアプリを実行できる。
+### Dockerコマンドまとめ
+#### [1]コンテナ一覧表示
+> docker ps
 
-※デバッグモードでの起動でも可能。
+#### [2]コンテナ作成・バッググラウンド起動
+> docker-compose up -d
+
+#### [3]コンテナ・イメージ・ボリューム・ネットワークを一括完全消去
+> docker-compose down --rmi all --volumes
+
+②APIをVisual Studioにて、実行できる。
+
+※デバッグモードでの起動でも可能
 
 ## ◆確認方法
-
 Google Chromeの拡張機能であるTalend API Testerを使用している。
 
 リクエストの内容は以下の構成とする。
 
-#### ◆編集開始API
+#### ①編集開始API
 ```bash
 【POST】http://localhost:9999/edit/start/{userId}
 userId：文字列
@@ -32,7 +46,7 @@ userId：文字列
 
 Bodyデータ：なし
 
-#### ◆データ追加API
+#### ②データ追加API
 ```bash
 【PUT】http://localhost:9999/edit/add/{userId}/{memoId}
 userId：文字列
@@ -47,20 +61,20 @@ Bodyデータは以下のようにする。
 }
 ```
 
-#### ◆データ削除API
+#### ③データ削除API
 ```bash
 【DELETE】http://localhost:9999/edit/remove/{userId}/{memoId}
 userId：文字列
 memoId：数値
 ```
 
-#### ◆編集終了API
+#### ④編集終了API
 ```bash
 【DELETE】http://localhost:9999/edit/end/{userId}
 userId：文字列
 ```
 
-#### ◆データ取得API
+#### ⑤データ取得API
 ```bash
 【GET】http://localhost:9999/get/data
 ```

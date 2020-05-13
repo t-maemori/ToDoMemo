@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    hostname: redis-server
+    ports:
+      - 9998:9998
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-container
+    hostname: mysql-server
+    ports:
+      - 9997:9997
+    volumes:
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+    environment:
+      MYSQL_DATABASE: mysql_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_ROOT_PASSWORD: root
+
