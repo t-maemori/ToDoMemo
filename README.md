@@ -49,6 +49,22 @@ NAMES：コンテナ一覧の表示で「NAMES」項目を追加
 #### [3]キーに登録されている値を確認
 > get [key]
 
+### MySQLコマンドまとめ
+#### [1]MySQL接続
+>  mysql --user=docker --password=docker
+
+#### [2]使用データベースの選択
+> use mysql_database;
+
+#### [3]テーブル一覧確認
+> show tables;
+
+#### [4]データ確認
+> SELECT * FROM [テーブル名];
+
+#### [5]MySQLから切断
+> \q
+
 ②APIをVisual Studioにて、実行できる。
 
 ※デバッグモードでの起動でも可能
