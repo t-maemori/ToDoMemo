@@ -29,6 +29,26 @@
 #### [3]コンテナ・イメージ・ボリューム・ネットワークを一括完全消去
 > docker-compose down --rmi all --volumes
 
+#### [4]コンテナ接続
+> docker exec -it [NAMES] bash
+
+NAMES：コンテナ一覧の表示で「NAMES」項目を追加
+
+※Windoswの場合、上記コマンドの先頭に「winpty」を加えなければいけない可能性がある。
+
+#### [5]コンテナ接続から切断
+> exit
+
+### Redisコマンドまとめ
+#### [1]Redis接続
+> redis-cli
+
+#### [2]Redisに登録されているキーの一覧を確認
+> keys *
+
+#### [3]キーに登録されている値を確認
+> get [key]
+
 ②APIをVisual Studioにて、実行できる。
 
 ※デバッグモードでの起動でも可能
