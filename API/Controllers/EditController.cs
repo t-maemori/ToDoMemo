@@ -18,7 +18,7 @@ namespace API.Controllers
         [HttpPost("start/{userId}")]
         public short PostStartEdit(string userId)
         {
-            return EditUserService.SetEditUser(userId);
+            return EditUserService.StartEditUser(userId);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace API.Controllers
         [HttpDelete("end/{userId}")]
         public short DeleteEndEdit(string userId)
         {
-            return EditUserService.ResetEditUser(userId);
+            return EditUserService.EndEditUser(userId);
         }
     }
 }
