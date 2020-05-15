@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Models;
+using API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -13,13 +14,11 @@ namespace API.Controllers
         /// GET: get/data
         /// データ取得API
         /// </summary>
-        /// <returns></returns>
+        /// <returns>メモデータリスト</returns>
         [HttpGet("data")]
         public List<Memo> GetMemo()
         {
-            // 処理は後ほど
-
-            return null;
+            return MemoDataService.GetMemoData();
         }
     }
 }
